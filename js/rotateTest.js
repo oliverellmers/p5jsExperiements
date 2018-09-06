@@ -1,7 +1,14 @@
 
 
 var p1, p2, dir;
+var eyeball;
+var img;
+var isMousePressed = false;
 
+function preload() {
+  eyeball = loadModel('assets/Eye.obj', true);
+  img = loadImage("assets/eyeColor_small.jpg");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
@@ -22,7 +29,7 @@ function draw() {
   //p1.y = map(mouseY, 0, height, -400, 400);
   p1.x = mouseX;
   p1.y = mouseY;
-  p1.z = -100;
+  p1.z = -400;
 
   /*
   dir = p5.Vector.sub(p2, p1);
@@ -32,12 +39,12 @@ function draw() {
 
 
   var boxSize = width / 25;
-  var stepSize = boxSize * 1.5;
+  var stepSize = boxSize * 1.75;
 
   translate(width/2 + boxSize/2, height/2 + boxSize/2);
 
   push();
-  pointLight(255, 255, 255, p1.x, p1.y, p1.z);
+  pointLight(100, 100, 100, p1.x, p1.y, p1.z);
   pop();
 
 /*
@@ -55,7 +62,7 @@ function draw() {
   for(var x = 0; x < width - boxSize/2; x+=stepSize){
     for(var y = 0; y < height - boxSize/2; y+= stepSize){
 
-      var tempP2 = createVector(x, y, 200);
+      var tempP2 = createVector(x, y,100);
       //dir = p5.Vector.sub(p2, p1);
       dir = p5.Vector.sub(tempP2, p1);
 
@@ -64,26 +71,31 @@ function draw() {
 
 
       push();
-      translate(x - width,y - height, 0);
+      translate(x - width + boxSize/2,y - height, 0);
       rotateX(-pitch);
       rotateY(yaw);
-      //stroke(255);
-      //noFill();
+      if(isMousePressed){
+        specularMaterial(255);
+      }else{
+        normalMaterial();
+      }
       
-      normalMaterial();
       //specularMaterial(250, 0, 0);
       //ambientMaterial(255);
       box(boxSize);
+      //scale(0.25, 0.25, 0.25);
+      //texture(img);
+      //textureMode();
+      //model(eyeball);
       pop();
     }
     
 
   }
+}
 
-
-  
-
-
+function mousePressed(){
+  isMousePressed = true;
 
 }
 
