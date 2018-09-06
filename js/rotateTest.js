@@ -1,15 +1,15 @@
-/*
-var angle = 0;
-var targetAngle = 0;
-var easing = 0.05;
-*/
 
-var rotZFactor = 0;
 
 var p1, p2, dir;
 
+
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
+
+  var fov = 60 / 180 * PI;
+  var cameraZ = height / 2.0 / tan(fov / 2.0);
+  perspective(60 / 180 * PI, width / height, cameraZ * 0.1, cameraZ * 10);
+
   p1 = createVector(-200, 100, -200);
   p2 = createVector(200, 100, -500);
 
@@ -22,6 +22,7 @@ function draw() {
   //p1.y = map(mouseY, 0, height, -400, 400);
   p1.x = mouseX;
   p1.y = mouseY;
+  p1.z = -100;
 
   /*
   dir = p5.Vector.sub(p2, p1);
@@ -29,10 +30,14 @@ function draw() {
   var yaw = -asin(dir.x / (cos(pitch) * dir.mag()));
   */
 
-  translate(width/2, height/2 + 100);
+
+  var boxSize = width / 25;
+  var stepSize = boxSize * 1.5;
+
+  translate(width/2 + boxSize/2, height/2 + boxSize/2);
 
   push();
-  pointLight(250, 250, 250, p1.x, -p1.y, 400);
+  pointLight(255, 255, 255, p1.x, p1.y, p1.z);
   pop();
 
 /*
@@ -46,10 +51,11 @@ function draw() {
   pop();
 */
 
-  for(var x = 0; x < width; x+=200){
-    for(var y = 0; y < height; y+= 200){
+  
+  for(var x = 0; x < width - boxSize/2; x+=stepSize){
+    for(var y = 0; y < height - boxSize/2; y+= stepSize){
 
-      var tempP2 = createVector(x, y, -400);
+      var tempP2 = createVector(x, y, 200);
       //dir = p5.Vector.sub(p2, p1);
       dir = p5.Vector.sub(tempP2, p1);
 
@@ -61,8 +67,13 @@ function draw() {
       translate(x - width,y - height, 0);
       rotateX(-pitch);
       rotateY(yaw);
-      ambientMaterial(250);
-      box(75);
+      //stroke(255);
+      //noFill();
+      
+      normalMaterial();
+      //specularMaterial(250, 0, 0);
+      //ambientMaterial(255);
+      box(boxSize);
       pop();
     }
     
@@ -81,5 +92,7 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 
 }
+
+
 
 
