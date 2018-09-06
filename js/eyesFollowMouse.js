@@ -8,7 +8,7 @@ var count;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  //u = int(width/15);
+
   u = 100;
   l = 40;
   var highCount = height/80;
@@ -28,7 +28,8 @@ function draw() {
   
   
   if (mouseIsPressed) {
-    background(0);
+    background(255, 0, 0);
+    noStroke();
     stroke(255,163,163);
   } else {
     background(255);
@@ -85,6 +86,7 @@ Module.prototype.draw2 = function() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  setup();
 }
 
 
