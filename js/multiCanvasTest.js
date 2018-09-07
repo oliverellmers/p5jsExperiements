@@ -18,15 +18,26 @@ let step, windowStep; // the height of our slit strips
 let w = 256;
 let h = 256;
 
+var font;
+var fontsize = 32
 
+function preload() {
+  font = loadFont('assets/Agenda-Super210.otf');
+}
 
 function setup() {
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);//, WEBGL);
+  pixelDensity(1);
   boxBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
 
   
   setupBoxes();
   setupSlitScan();
+
+  textFont(font);
+  textSize(fontsize);
+  textStyle(BOLD);
+  textAlign(CENTER, CENTER);
   
 
   multiCanvas.parent("multiCanvas");
@@ -39,6 +50,38 @@ function draw() {
   
   if(isMousePressed){
     drawSlitScan();
+  }
+
+  // Set the gap between letters and the left and top margin
+  var gap = 52;
+  var margin = 10;
+  translate(margin * 4, margin * 4);
+
+  // Set the counter to start at the character you want
+  // in this case 35, which is the # symbol
+  var counter = 35;
+
+  // Loop as long as there is space on the canvas
+  for (y = 0; y < height - gap; y += gap) {
+    for (x = 0; x < width - gap; x += gap) {
+
+      // Use the counter to retrieve individual letters by their Unicode number
+      var letter = char(counter);
+
+      // Add different color to the vowels and other characters
+      if (letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U') {
+        fill('#ed225d');
+      }
+      else {
+        fill(255);
+      }
+
+      // Draw the letter to the screen
+      text(letter, x, y);
+
+      // Increment the counter
+      counter++;
+    }
   }
   
   
@@ -53,6 +96,7 @@ function setupBoxes(){
 function drawBoxes(){
   
   boxBuffer.background(0);
+  boxBuffer.size(windowWidth, windowHeight);
 
   p1.x = mouseX;
   p1.y = mouseY;
@@ -147,6 +191,7 @@ function mousePressed(){
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  boxBuffer.size(windowWidth, windowHeight);
 
 }
 

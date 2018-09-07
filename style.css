@@ -4,14 +4,9 @@ html, body {
   overflow:hidden;
 }
 
-/*
-#left{
+
+#multiCanvas{
 	position:absolute;
 	z-index:auto;
 }
 
-#right{
-	position:absolute;
-	z-index: 1;
-}
-*/
