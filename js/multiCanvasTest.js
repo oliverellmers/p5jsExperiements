@@ -24,9 +24,13 @@ var fontsize = 32
 var head;
 var headBuffer;
 
+let camShader;
+var shaderBuffer;
+
 function preload() {
   font = loadFont('assets/Agenda-Super210.otf');
   head = loadModel('assets/SkeleHead.obj', true);
+  
 }
 
 function setup() {
@@ -34,11 +38,16 @@ function setup() {
   pixelDensity(1);
   boxBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
   headBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
+  //shaderBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
+
 
   
   setupBoxes();
   setupSlitScan();
   setupText();
+
+  //camShader = loadShader('assets/effect.vert', 'assets/effect.frag');
+
 
   multiCanvas.parent("multiCanvas");
 }
@@ -46,13 +55,17 @@ function setup() {
 function draw() {
   
   drawBoxes();
-  drawHead();
 
+  //console.log("boxBuffer.width: " + boxBuffer.width);
+  //console.log("boxBuffer.height: " + boxBuffer.height);
+  boxBuffer.width = window.innerWidth;
+  boxBuffer.height = window.innerHeight;
+
+  drawBoxes();
   if(isMousePressed){
     drawSlitScan();
   }
-
-  
+  drawHead();
   drawText();
 }
 
@@ -70,7 +83,7 @@ function drawBoxes(){
   p1.y = mouseY;
   p1.z = -400;
 
-  var boxSize = width / 25;
+  var boxSize = width / 10;
   var stepSize = boxSize * 1.75;
   
   
@@ -95,7 +108,7 @@ function drawBoxes(){
     }
   }
 
-  image(boxBuffer, 0, 0);
+  image(boxBuffer, 0, 0, windowWidth, windowHeight);
 }
 
 var rotY = 0;
@@ -115,7 +128,6 @@ function drawHead(){
   pop();
 
   image(headBuffer,0,0);
-  //headBuffer.clear();
 }
 
 function setupSlitScan(){
@@ -141,7 +153,7 @@ function setupSlitScan(){
 }
 
 function drawSlitScan(){
-  //background(0);
+  background(0);
   // draw the current camera frame in the first element of the array
   pastFrames[0].image(cam, 0, 0, w, h);
   
@@ -149,7 +161,7 @@ function drawSlitScan(){
   // we loop through all the frames and draw a slice at each step along the y axis
   for(let i = 0; i<pastFrames.length; i++){
     // image(img, x, y, w, h, srcX, srcY, srcW, srcH);
-    image(pastFrames[i], 0, windowStep * i, width, windowStep, 0, step*i, w, step);
+    image(pastFrames[i], 0, windowStep * i, width, windowStep, 0, step*i, w, step);    
     //texture(pastFrames[i], 0, windowStep * i, width, windowStep, 0, step*i, w, step);
   }
 
@@ -162,6 +174,7 @@ function drawSlitScan(){
 
   // move the last element to the beginning
   pastFrames[pastFrames.length-1] = pastFrames[0];
+  filter('INVERT');
 }
 
 function setupText(){
@@ -205,6 +218,16 @@ function drawText(){
   }
 }
 
+/*
+function doShaderEffect(){
+  shaderBuffer.shader(camShader);
+  camShader.setUniform('tex0', cam);
+  camShader.setUniform('tex1', boxBuffer);
+  camShader.setUniform('amt', map(mouseX, 0, width, 0, 0.2));
+  shaderBuffer.rect(0,0,width, height);
+}
+*/
+
 function mousePressed(){
   isMousePressed = true;
 
@@ -212,7 +235,11 @@ function mousePressed(){
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  boxBuffer.size(windowWidth, windowHeight);
+
+  boxBuffer.remove();
+  boxBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
+  //headBuffer.remove();
+  //headBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
 
 }
 
