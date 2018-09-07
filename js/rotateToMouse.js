@@ -5,9 +5,8 @@ var isMousePressed = false;
 
 
 function setup() {
-  var boxes = createCanvas(windowWidth, windowHeight, WEBGL);
-  noStroke();
-
+  //var boxes = createCanvas(windowWidth, windowHeight, WEBGL);
+  createCanvas(windowWidth, windowHeight, WEBGL);
 
   var fov = 60 / 180 * PI;
   var cameraZ = height / 2.0 / tan(fov / 2.0);
@@ -16,7 +15,7 @@ function setup() {
   p1 = createVector(-200, 100, -200);
   p2 = createVector(200, 100, -500);
 
-  boxes.parent("left");
+  //boxes.parent("boxes");
 }
 
 function draw() {
@@ -68,11 +67,8 @@ function drawBoxes(){
       translate(x - width + boxSize/2,y - height, 0);
       rotateX(-pitch);
       rotateY(yaw);
-      if(isMousePressed){
-        specularMaterial(255);
-      }else{
-        normalMaterial();
-      }
+      
+      normalMaterial();
 
       box(boxSize);
       pop();

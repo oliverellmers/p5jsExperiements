@@ -1,5 +1,9 @@
-// this sketch holds on to a collection of old frames in order to create a slitscan effect
-// it actually doesn't use a shader but it's often lumped in with graphics things so here it is
+
+
+var p1, p2, dir;
+var isMousePressed = false;
+
+var boxBuffer;
 
 // the camera variable
 let cam;
@@ -11,16 +15,86 @@ let step, windowStep; // the height of our slit strips
 // the width and height of our past frames
 // we make them smaller so that we can store more
 // at the expense of image quality
-let w = 512;
-let h = 512;
+let w = 256;
+let h = 256;
+
+
 
 function setup() {
-  // shaders require WEBGL mode to work
-  var video = createCanvas(windowWidth, windowHeight);
-  //createCanvas(windowWidth, windowHeight);
-  noStroke();
+  var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);//, WEBGL);
+  boxBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
+
+  
+  setupBoxes();
+  setupSlitScan();
   
 
+  multiCanvas.parent("multiCanvas");
+}
+
+function draw() {
+  
+  drawBoxes();
+  
+  
+  if(isMousePressed){
+    drawSlitScan();
+  }
+  
+  
+  
+}
+
+function setupBoxes(){
+  p1 = createVector(-200, 100, -200);
+  p2 = createVector(200, 100, -500);
+}
+
+function drawBoxes(){
+  
+  boxBuffer.background(0);
+
+  p1.x = mouseX;
+  p1.y = mouseY;
+  p1.z = -400;
+
+  var boxSize = width / 25;
+  var stepSize = boxSize * 1.75;
+
+  //boxBuffer.translate(width/2 + boxSize/2, height/2 + boxSize/2);
+
+  //push();
+  //pointLight(100, 100, 100, p1.x, p1.y, p1.z);
+  //pop();
+
+  
+  for(var x = 0; x < width - boxSize/2; x+=stepSize){
+    for(var y = 0; y < height - boxSize/2; y+= stepSize){
+      boxBuffer.resetMatrix();
+      boxBuffer.translate(width/2 + boxSize/2, height/2 + boxSize/2);
+      var tempP2 = createVector(x, y,100);
+      dir = p5.Vector.sub(tempP2, p1);
+
+      var pitch = asin(dir.y / dir.mag());
+      var yaw = -asin(dir.x / (cos(pitch) * dir.mag()));
+
+
+      push();
+      boxBuffer.translate(x - width + boxSize/2,y - height, 0);
+      boxBuffer.rotateX(-pitch);
+      boxBuffer.rotateY(yaw);     
+      boxBuffer.normalMaterial();
+      boxBuffer.box(boxSize);
+      pop();
+    }
+  }
+
+  image(boxBuffer, 0, 0);
+
+  
+}
+
+function setupSlitScan(){
   // initialize the webcam at the window size
   cam = createCapture(VIDEO);
   cam.size(windowWidth, windowHeight);
@@ -40,12 +114,10 @@ function setup() {
     pastFrames.push(p);
   }
 
-  video.parent("video");
 }
 
-function draw() {  
-
-  
+function drawSlitScan(){
+  //background(0);
   // draw the current camera frame in the first element of the array
   pastFrames[0].image(cam, 0, 0, w, h);
   
@@ -54,6 +126,7 @@ function draw() {
   for(let i = 0; i<pastFrames.length; i++){
     // image(img, x, y, w, h, srcX, srcY, srcW, srcH);
     image(pastFrames[i], 0, windowStep * i, width, windowStep, 0, step*i, w, step);
+    //texture(pastFrames[i], 0, windowStep * i, width, windowStep, 0, step*i, w, step);
   }
 
   // move every element forward by 1, except the last element
@@ -65,11 +138,18 @@ function draw() {
 
   // move the last element to the beginning
   pastFrames[pastFrames.length-1] = pastFrames[0];
+}
+
+function mousePressed(){
+  isMousePressed = true;
 
 }
 
-function windowResized(){
+function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 
-  step = (h / numFrames);
 }
+
+
+
+

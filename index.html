@@ -8,8 +8,11 @@
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/p5.min.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/addons/p5.dom.min.js"></script>
 
-    	<script src="js/rotateToMouse.js"></script>
-		<script src="js/slitscan.js"></script>
+    	<!--<script src='js/slitscan.js'></script>
+    	<script src='js/rotateToMouse.js'></script>-->
+    	<script src='js/multiCanvasTest.js'></script>
+
+    	
 
 
 		<style>
@@ -19,24 +22,28 @@
 	</head>
 	<body>
 
-		<button onclick="myFunction()">Try it</button>
+		<!--<button onclick="myFunction()">Try it</button>-->
+
 
 		<div class="container">
-			<div id="right"></div>
-  			<div id="left"></div>
-  			
+			<!--<div id="video"></div>
+			<div id="boxes" stye="display:none;"></div>-->
+			<div id="multiCanvas"></div>
 		</div>
 
+		<!--
 		<script>
 			function myFunction() {
-    			var x = document.getElementById("right");
-    			if (x.style.display === "none") {
-        			x.style.display = "block";
-    			} else {
-        			x.style.display = "none";
-    			}
-			}
+   				var videoFrame = document.getElementById("video"); 
+   				var boxesFrame = document.getElementById("boxes");
+
+				   videoFrame.style.display = (
+				       videoFrame.style.display == "none" ? "block" : "none"); 
+				   boxesFrame.style.display = (
+				       boxesFrame.style.display == "none" ? "block" : "none"); 
+}
 		</script>
+	-->
 
 		
 
