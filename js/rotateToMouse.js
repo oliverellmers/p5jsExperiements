@@ -1,17 +1,13 @@
 
 
 var p1, p2, dir;
-var eyeball;
-var img;
 var isMousePressed = false;
 
-function preload() {
-  eyeball = loadModel('assets/Eye.obj', true);
-  img = loadImage("assets/eyeColor_small.jpg");
-}
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
+  var boxes = createCanvas(windowWidth, windowHeight, WEBGL);
+  noStroke();
+
 
   var fov = 60 / 180 * PI;
   var cameraZ = height / 2.0 / tan(fov / 2.0);
@@ -20,23 +16,21 @@ function setup() {
   p1 = createVector(-200, 100, -200);
   p2 = createVector(200, 100, -500);
 
+  boxes.parent("left");
 }
 
 function draw() {
-  background(0);
+  drawBoxes();
+}
 
+
+function drawBoxes(){
+  background(0);
   //p1.x = map(mouseX, 0, width, -400, 400);
   //p1.y = map(mouseY, 0, height, -400, 400);
   p1.x = mouseX;
   p1.y = mouseY;
   p1.z = -400;
-
-  /*
-  dir = p5.Vector.sub(p2, p1);
-  var pitch = asin(dir.y / dir.mag());
-  var yaw = -asin(dir.x / (cos(pitch) * dir.mag()));
-  */
-
 
   var boxSize = width / 25;
   var stepSize = boxSize * 1.75;
@@ -79,19 +73,13 @@ function draw() {
       }else{
         normalMaterial();
       }
-      
-      //specularMaterial(250, 0, 0);
-      //ambientMaterial(255);
+
       box(boxSize);
-      //scale(0.25, 0.25, 0.25);
-      //texture(img);
-      //textureMode();
-      //model(eyeball);
       pop();
     }
-    
 
   }
+
 }
 
 function mousePressed(){

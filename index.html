@@ -8,6 +8,9 @@
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/p5.min.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/addons/p5.dom.min.js"></script>
 
+    	<script src="js/rotateToMouse.js"></script>
+		<script src="js/slitscan.js"></script>
+
 
 		<style>
 			body { margin: 0; }
@@ -16,7 +19,26 @@
 	</head>
 	<body>
 
-		<script src="js/rotateTest.js"></script>
+		<button onclick="myFunction()">Try it</button>
+
+		<div class="container">
+			<div id="right"></div>
+  			<div id="left"></div>
+  			
+		</div>
+
+		<script>
+			function myFunction() {
+    			var x = document.getElementById("right");
+    			if (x.style.display === "none") {
+        			x.style.display = "block";
+    			} else {
+        			x.style.display = "none";
+    			}
+			}
+		</script>
+
+		
 
 
 	</body>
