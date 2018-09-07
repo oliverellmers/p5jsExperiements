@@ -21,24 +21,24 @@ let h = 256;
 var font;
 var fontsize = 32
 
+var head;
+var headBuffer;
+
 function preload() {
   font = loadFont('assets/Agenda-Super210.otf');
+  head = loadModel('assets/SkeleHead.obj', true);
 }
 
 function setup() {
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);//, WEBGL);
   pixelDensity(1);
   boxBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
+  headBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
 
   
   setupBoxes();
   setupSlitScan();
-
-  textFont(font);
-  textSize(fontsize);
-  textStyle(BOLD);
-  textAlign(CENTER, CENTER);
-  
+  setupText();
 
   multiCanvas.parent("multiCanvas");
 }
@@ -46,46 +46,14 @@ function setup() {
 function draw() {
   
   drawBoxes();
-  
-  
+  drawHead();
+
   if(isMousePressed){
     drawSlitScan();
   }
 
-  // Set the gap between letters and the left and top margin
-  var gap = 52;
-  var margin = 10;
-  translate(margin * 4, margin * 4);
-
-  // Set the counter to start at the character you want
-  // in this case 35, which is the # symbol
-  var counter = 35;
-
-  // Loop as long as there is space on the canvas
-  for (y = 0; y < height - gap; y += gap) {
-    for (x = 0; x < width - gap; x += gap) {
-
-      // Use the counter to retrieve individual letters by their Unicode number
-      var letter = char(counter);
-
-      // Add different color to the vowels and other characters
-      if (letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U') {
-        fill('#ed225d');
-      }
-      else {
-        fill(255);
-      }
-
-      // Draw the letter to the screen
-      text(letter, x, y);
-
-      // Increment the counter
-      counter++;
-    }
-  }
   
-  
-  
+  drawText();
 }
 
 function setupBoxes(){
@@ -104,13 +72,7 @@ function drawBoxes(){
 
   var boxSize = width / 25;
   var stepSize = boxSize * 1.75;
-
-  //boxBuffer.translate(width/2 + boxSize/2, height/2 + boxSize/2);
-
-  //push();
-  //pointLight(100, 100, 100, p1.x, p1.y, p1.z);
-  //pop();
-
+  
   
   for(var x = 0; x < width - boxSize/2; x+=stepSize){
     for(var y = 0; y < height - boxSize/2; y+= stepSize){
@@ -134,8 +96,26 @@ function drawBoxes(){
   }
 
   image(boxBuffer, 0, 0);
+}
 
+var rotY = 0;
+function drawHead(){
   
+  headBuffer.background(0,0);
+  headBuffer.resetMatrix();
+  headBuffer.translate(0,0,0);
+
+
+  rotY+= 0.025;
+
+  push();
+  headBuffer.rotateZ(radians(180));
+  headBuffer.rotateY(rotY);
+  headBuffer.model(head);
+  pop();
+
+  image(headBuffer,0,0);
+  //headBuffer.clear();
 }
 
 function setupSlitScan(){
@@ -182,6 +162,47 @@ function drawSlitScan(){
 
   // move the last element to the beginning
   pastFrames[pastFrames.length-1] = pastFrames[0];
+}
+
+function setupText(){
+  textFont(font);
+  textSize(fontsize);
+  textStyle(BOLD);
+  textAlign(CENTER, CENTER);
+}
+
+function drawText(){
+  // Set the gap between letters and the left and top margin
+  var gap = 52;
+  var margin = 10;
+  translate(margin * 4, margin * 4);
+
+  // Set the counter to start at the character you want
+  // in this case 35, which is the # symbol
+  var counter = 35;
+
+  // Loop as long as there is space on the canvas
+  for (y = 0; y < height - gap; y += gap) {
+    for (x = 0; x < width - gap; x += gap) {
+
+      // Use the counter to retrieve individual letters by their Unicode number
+      var letter = char(counter);
+
+      // Add different color to the vowels and other characters
+      if (letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U') {
+        fill('#ed225d');
+      }
+      else {
+        fill(255);
+      }
+
+      // Draw the letter to the screen
+      text(letter, x, y);
+
+      // Increment the counter
+      counter++;
+    }
+  }
 }
 
 function mousePressed(){
