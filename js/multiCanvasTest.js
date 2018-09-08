@@ -130,6 +130,7 @@ function drawHead(){
 
   image(headBuffer,0,0);
 }
+*/
 
 function setupSlitScan(){
   // initialize the webcam at the window size
@@ -152,7 +153,7 @@ function setupSlitScan(){
   }
 
 }
-*/
+
 
 function drawSlitScan(){
   background(0);
