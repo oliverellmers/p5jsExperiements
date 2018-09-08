@@ -29,7 +29,7 @@ var shaderBuffer;
 
 function preload() {
   font = loadFont('assets/Agenda-Super210.otf');
-  head = loadModel('assets/SkeleHead.obj', true);
+  //head = loadModel('assets/SkeleHead.obj', true);
   
 }
 
@@ -37,7 +37,7 @@ function setup() {
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);//, WEBGL);
   pixelDensity(1);
   boxBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
-  headBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
+  //headBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
   //shaderBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
 
 
@@ -65,7 +65,7 @@ function draw() {
   if(isMousePressed){
     drawSlitScan();
   }
-  drawHead();
+  //drawHead();
   drawText();
 }
 
@@ -111,6 +111,7 @@ function drawBoxes(){
   image(boxBuffer, 0, 0, windowWidth, windowHeight);
 }
 
+/*
 var rotY = 0;
 function drawHead(){
   
@@ -151,6 +152,7 @@ function setupSlitScan(){
   }
 
 }
+*/
 
 function drawSlitScan(){
   background(0);
