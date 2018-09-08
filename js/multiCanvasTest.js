@@ -156,7 +156,7 @@ function setupSlitScan(){
 
 
 function drawSlitScan(){
-  background(0);
+  //background(0);
   // draw the current camera frame in the first element of the array
   pastFrames[0].image(cam, 0, 0, w, h);
   
