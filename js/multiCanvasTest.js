@@ -43,7 +43,7 @@ function setup() {
 
   
   setupBoxes();
-  setupSlitScan();
+  //setupSlitScan();
   setupText();
 
   //camShader = loadShader('assets/effect.vert', 'assets/effect.frag');
@@ -63,7 +63,7 @@ function draw() {
 
   drawBoxes();
   if(isMousePressed){
-    drawSlitScan();
+    //drawSlitScan();
   }
   //drawHead();
   drawText();
