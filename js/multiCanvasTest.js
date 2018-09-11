@@ -1,5 +1,7 @@
 
 
+p5.disableFriendlyErrors = true;
+
 var p1, p2, dir;
 var isMousePressed = false;
 
@@ -58,12 +60,13 @@ function draw() {
 
   //console.log("boxBuffer.width: " + boxBuffer.width);
   //console.log("boxBuffer.height: " + boxBuffer.height);
-  boxBuffer.width = window.innerWidth;
-  boxBuffer.height = window.innerHeight;
+  //boxBuffer.width = window.innerWidth;
+  //boxBuffer.height = window.innerHeight;
 
   drawBoxes();
   if(isMousePressed){
     //drawSlitScan();
+    filter('INVERT');
   }
   //drawHead();
   drawText();
@@ -83,7 +86,7 @@ function drawBoxes(){
   p1.y = mouseY;
   p1.z = -400;
 
-  var boxSize = width / 30;
+  var boxSize = width / 20;
   var stepSize = boxSize * 1.75;
   
   
@@ -239,6 +242,7 @@ function mousePressed(){
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 
+  //SUPER hacky way of doing this - does not seem to work with the head buffer probably due to memory
   boxBuffer.remove();
   boxBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
   //headBuffer.remove();
