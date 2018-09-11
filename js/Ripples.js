@@ -103,13 +103,13 @@ function draw() {
 
 function mouseMoved() {
     if (random() < pow(fps / 60, 3) * mouse_speed / 30) {
-        ripples.push(new Ripple(mouseX, mouseY, 0.15 * mouse_speed / 40));
+        ripples.push(new Ripple(mouseX, mouseY, 0.6 * mouse_speed / 40));
     }
 }
 
 function mouseDragged() {
     if (random() < pow(fps / 60, 3) * mouse_speed / 20) {
-        ripples.push(new Ripple(mouseX, mouseY, 0.6 * mouse_speed / 40));
+        ripples.push(new Ripple(mouseX, mouseY, 2 * mouse_speed / 40));
     }
 }
 
