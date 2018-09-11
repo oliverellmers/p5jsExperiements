@@ -83,7 +83,7 @@ function drawBoxes(){
   p1.y = mouseY;
   p1.z = -400;
 
-  var boxSize = width / 10;
+  var boxSize = width / 30;
   var stepSize = boxSize * 1.75;
   
   
@@ -91,7 +91,7 @@ function drawBoxes(){
     for(var y = 0; y < height - boxSize/2; y+= stepSize){
       boxBuffer.resetMatrix();
       boxBuffer.translate(width/2 + boxSize/2, height/2 + boxSize/2);
-      var tempP2 = createVector(x, y,100);
+      var tempP2 = createVector(x, y,1);
       dir = p5.Vector.sub(tempP2, p1);
 
       var pitch = asin(dir.y / dir.mag());
