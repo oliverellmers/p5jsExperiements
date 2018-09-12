@@ -1,4 +1,4 @@
-const block_size = 25;
+const block_size = 20;
 const block_core = 1;
 const block_move_distance = 10;
 const block_move_range = 70;
@@ -103,13 +103,13 @@ function draw() {
 
 function mouseMoved() {
     if (random() < pow(fps / 60, 3) * mouse_speed / 30) {
-        ripples.push(new Ripple(mouseX, mouseY, 0.6 * mouse_speed / 40));
+        ripples.push(new Ripple(mouseX, mouseY, 0.3 * mouse_speed / 40));
     }
 }
 
 function mouseDragged() {
     if (random() < pow(fps / 60, 3) * mouse_speed / 20) {
-        ripples.push(new Ripple(mouseX, mouseY, 2 * mouse_speed / 40));
+        ripples.push(new Ripple(mouseX, mouseY, 0.5 * mouse_speed / 40));
     }
 }
 
