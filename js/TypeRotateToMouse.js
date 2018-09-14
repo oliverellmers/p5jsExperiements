@@ -138,6 +138,9 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 
   //SUPER hacky way of doing this - does not seem to work with the head buffer probably due to memory
+  multiCanvas.remove();
+  multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
+
   boxBuffer.remove();
   boxBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
   //headBuffer.remove();
