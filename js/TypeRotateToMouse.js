@@ -6,14 +6,12 @@ var p1, p2, dir;
 var isMousePressed = false;
 
 var boxBuffer;
-var textTexBuffer;
-
 var textBuffersArr = [];
 
 var font;
-var fontsize = 128;
+var fontsize = 32;
 
-var boxSize;
+var planeSize;
 var stepSize;
 var numGraphics = 0;
 
@@ -31,8 +29,8 @@ function setup() {
   boxBuffer = createGraphics(windowWidth, windowHeight, WEBGL);
 
   
-  boxSize = width / 10;
-  stepSize = boxSize * 1.1;
+  planeSize = width / 10;
+  stepSize = planeSize * 1.1;
 
   setupText();
   setupBoxes();
@@ -67,11 +65,11 @@ function drawBoxes(){
   p1.z = -100;
 
   
-  var letterCounter = 0;
-  for(var x = 0; x < width - boxSize/2; x+=stepSize){
-    for(var y = 0; y < height - boxSize/2; y+= stepSize){
+  var count = 0;
+  for(var x = 0; x < width - planeSize/2; x+=stepSize){
+    for(var y = 0; y < height - planeSize/2; y+= stepSize){
       boxBuffer.resetMatrix();
-      boxBuffer.translate(width/2 + boxSize/2, height/2 + boxSize/2);
+      boxBuffer.translate(width/2 + planeSize/2, height/2 + planeSize/2);
       var tempP2 = createVector(x, y,1);
       dir = p5.Vector.sub(tempP2, p1);
 
@@ -84,10 +82,10 @@ function drawBoxes(){
       boxBuffer.rotateX(-pitch);
       boxBuffer.rotateY(yaw);     
       
-      boxBuffer.texture(textBuffersArr[letterCounter]);
-      boxBuffer.plane(boxSize, boxSize);
+      boxBuffer.texture(textBuffersArr[count]);
+      boxBuffer.plane(planeSize, planeSize);
       pop();
-      letterCounter++;
+      count++;
     }
   }
 
@@ -97,12 +95,9 @@ function drawBoxes(){
 
 
 function setupText(){
-
-  textTexBuffer = createGraphics(64, 64, P2D);
-
   
-  for(var x = 0; x < width - boxSize/2; x+=stepSize){
-    for(var y = 0; y < height - boxSize/2; y+= stepSize){
+  for(var x = 0; x < width - planeSize/2; x+=stepSize){
+    for(var y = 0; y < height - planeSize/2; y+= stepSize){
         numGraphics += 1;
     }
   }
@@ -111,8 +106,6 @@ function setupText(){
     textBuffersArr[i] = createGraphics(64, 64, P2D);
 
   }
-
-  //console.log("numGraphics: " + numGraphics);
 }
 
 function drawText(){
@@ -125,7 +118,7 @@ function drawText(){
 
     textBuffersArr[i].background(0);
     textBuffersArr[i].fill('#ed225d');
-    textBuffersArr[i].textSize(32);
+    textBuffersArr[i].textSize(fontsize);
     textBuffersArr[i].textAlign(CENTER);
     textBuffersArr[i].textStyle(BOLD);
     textBuffersArr[i].text(letter, 32,32);
