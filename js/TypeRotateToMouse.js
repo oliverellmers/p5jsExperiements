@@ -46,7 +46,8 @@ function init(){
   pixelDensity(1);
 
   planeCount = 0;
-  planeSize = _w / 10;
+  //planeSize = _w / 12;
+  planeSize = 75;
   stepSize = planeSize;// * 1.1;
 
   p1 = createVector(-200, 100, -200);
@@ -73,7 +74,7 @@ function draw() {
 
 function drawBoxes(){
   
-  boxBuffer.background(0);
+  boxBuffer.background(0,0,0);
   boxBuffer.size(_w, _h);
 
   p1.x = mouseX;
@@ -145,7 +146,8 @@ function drawBoxes(){
 
           //Random distribution:
           //was % 4 for every 4 steps
-          if(planeCount %  Math.floor(Math.random() * 6) == 0 && textArrCount < textArr.length){
+          //if(planeCount %  4 == 0 && textArrCount < textArr.length){
+          if(planeCount %  Math.floor(Math.random() * 10) == 0 && textArrCount < textArr.length){
             textBuffersArr[planeCount].fill('#ffffff');
             //textBuffersArr[planeCount].text(letter, 32,32);
 
