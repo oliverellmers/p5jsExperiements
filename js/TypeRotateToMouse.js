@@ -47,7 +47,7 @@ function init(){
 
   planeCount = 0;
   planeSize = _w / 10;
-  stepSize = planeSize * 1.1;
+  stepSize = planeSize;// * 1.1;
 
   p1 = createVector(-200, 100, -200);
   p2 = createVector(200, 100, -500);
@@ -78,7 +78,7 @@ function drawBoxes(){
 
   p1.x = mouseX;
   p1.y = mouseY;
-  p1.z = -300;
+  p1.z = 1000;
 
   if(textBuffersArr.length == 0){
 
@@ -86,8 +86,8 @@ function drawBoxes(){
 
     var n = 0;
 
-    for(var x = 0; x < _w - planeSize/2; x+=stepSize){
-      for(var y = 0; y < _h - planeSize/2; y+= stepSize){
+    for(var y = 0; y < _h - planeSize/2; y+=stepSize){
+      for(var x = 0; x < _w - planeSize/2; x+= stepSize){
 
         var letter = char(n + 35);
 
@@ -97,21 +97,25 @@ function drawBoxes(){
         textBuffersArr[n].textAlign(CENTER);
         textBuffersArr[n].textStyle(BOLD);
         textBuffersArr[n].text(letter, 32,32);
+        //if(n == 50){
+        //  n = 0;
+        //}
         n++
+
       }
     }
   }
   
   var numGraphics = 0;
-  var text = "NEW WORK COMING SOON";
+  var text = "NEWWORKCOMINGSOON";
   textArr = (unchar(split(text, '')))
   var textArrCount = 0;
 
 
   if(isTextSetup){
 
-    for(var x = 0; x < _w - planeSize/2; x+=stepSize){
-      for(var y = 0; y < _h - planeSize/2; y+= stepSize){
+    for(var y = 0; y < _h ; y+=stepSize){
+      for(var x = 0; x < _w; x+= stepSize){
 
         boxBuffer.resetMatrix();
         boxBuffer.translate(_w/2 + planeSize/2, _h/2 + planeSize/2);
@@ -139,18 +143,24 @@ function drawBoxes(){
           textBuffersArr[planeCount].textStyle(BOLD);
           console.log();
 
-          if(planeCount % 4 == 0 && textArrCount < textArr.length){
+          //Random distribution:
+          //was % 4 for every 4 steps
+          if(planeCount %  Math.floor(Math.random() * 6) == 0 && textArrCount < textArr.length){
             textBuffersArr[planeCount].fill('#ffffff');
             //textBuffersArr[planeCount].text(letter, 32,32);
 
-            textBuffersArr[planeCount].text(char(textArr[textArrCount]), 32,32);
+            textBuffersArr[planeCount].text(char(textArr[textArrCount]), 64,64);
             
+            //if(textArrCount == 17){
+              //textArrCount = Math.floor(Math.random() * 17);
+            //}
+            //textArrCount = Math.floor(Math.random() * 17);
             textArrCount++;
 
 
           }else{
             textBuffersArr[planeCount].fill('#3D3D3D');
-            textBuffersArr[planeCount].text(letter, 32,32);
+            textBuffersArr[planeCount].text(letter, 64,64);
           }
 
 
@@ -180,7 +190,7 @@ function setupText(){
 
   for(var x = 0; x < _w - planeSize/2; x+=stepSize){
     for(var y = 0; y < _h - planeSize/2; y+= stepSize){
-      textBuffersArr[n] = createGraphics(64, 64, P2D);
+      textBuffersArr[n] = createGraphics(128, 128, P2D);
       n++;
     }
   }
