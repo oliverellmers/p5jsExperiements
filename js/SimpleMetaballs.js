@@ -31,6 +31,7 @@ function setup() {
 }
 
 function draw() {
+    background(0);
     HALF_W = gfx.width / 2;
     HALF_H = gfx.height / 2;
   
@@ -73,4 +74,8 @@ function draw() {
 
 function colorLookup(i) {
     return floor((i / 255) * numBands) * Band;
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
