@@ -55,12 +55,13 @@ function draw() {
             col += balls[m].radius / sqrt(xx * xx + yy * yy);
         }
 
-        let intensity = colorLookup(200 * col);
+        let intensity = colorLookup(255 * col);
 
-        gfx.pixels[i * 4 + 0] = intensity;
-        gfx.pixels[i * 4 + 1] = intensity;
+        //gfx.pixels[i * 4 + 0] = intensity;
+        //gfx.pixels[i * 4 + 1] = intensity;
         gfx.pixels[i * 4 + 2] = intensity;
         gfx.pixels[i * 4 + 3] = 128; //was 255
+
     }
   
     gfx.updatePixels();
