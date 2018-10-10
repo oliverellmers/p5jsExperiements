@@ -67,8 +67,8 @@ function draw() {
         gfx.pixels[i * 4 + 2] = intensity;
         gfx.pixels[i * 4 + 3] = 255;
         */
-        gfx.pixels[i * 4 + 0] = intensity;
-        gfx.pixels[i * 4 + 1] = intensity;
+        gfx.pixels[i * 4 + 0] = 0;
+        gfx.pixels[i * 4 + 1] = 0;
         gfx.pixels[i * 4 + 2] = intensity;
         gfx.pixels[i * 4 + 3] = 255; 
 
@@ -78,7 +78,11 @@ function draw() {
     gfx.updatePixels();
     scaleImage(gfx, scaledGfx);
     scaledGfx.updatePixels();
+
+
     image(scaledGfx, 0, 0);
+    
+    
     //filter(INVERT);
     //filter(ERODE);
     //filter(THRESHOLD);
