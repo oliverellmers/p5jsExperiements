@@ -55,7 +55,7 @@ function draw() {
             col += balls[m].radius / sqrt(xx * xx + yy * yy);
         }
 
-        let intensity = colorLookup(300 * col);
+        let intensity = colorLookup(256 * col);
 
         gfx.pixels[i * 4 + 0] = intensity;
         gfx.pixels[i * 4 + 1] = intensity;
@@ -78,4 +78,6 @@ function colorLookup(i) {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  //gfx.remove();
+  //gfx = createGraphics(width / scaleSz, height / scaleSz);
 }
