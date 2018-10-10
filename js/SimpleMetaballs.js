@@ -35,7 +35,7 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    //background(255,0,0);
     HALF_W = gfx.width / 2;
     HALF_H = gfx.height / 2;
   
@@ -67,6 +67,9 @@ function draw() {
         gfx.pixels[i * 4 + 2] = intensity;
         gfx.pixels[i * 4 + 3] = 255;
         */
+
+        //console.log("intensity: " + intensity);
+
         gfx.pixels[i * 4 + 0] = 0;
         gfx.pixels[i * 4 + 1] = 0;
         gfx.pixels[i * 4 + 2] = intensity;
