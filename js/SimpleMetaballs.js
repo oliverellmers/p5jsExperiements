@@ -23,7 +23,7 @@ function setup() {
     gfx = createImage(width / scaleSz, height / scaleSz);
     gfx.loadPixels();
   
-  	scaledGfx = createImage(width, height);
+  	scaledGfx = createImage(windowWidth, windowHeight);
     scaledGfx.loadPixels();
 
   	for(let i = 0; i < numBalls; ++i){
@@ -31,6 +31,7 @@ function setup() {
     }
 
     multiCanvas.parent("multiCanvas");
+    windowResized();
 }
 
 function draw() {
@@ -66,9 +67,9 @@ function draw() {
         gfx.pixels[i * 4 + 2] = intensity;
         gfx.pixels[i * 4 + 3] = 255;
         */
-        gfx.pixels[i * 4 + 0] = 0;
+        gfx.pixels[i * 4 + 0] = intensity;
         gfx.pixels[i * 4 + 1] = intensity;
-        gfx.pixels[i * 4 + 2] = 0;
+        gfx.pixels[i * 4 + 2] = intensity;
         gfx.pixels[i * 4 + 3] = 255; 
 
 
