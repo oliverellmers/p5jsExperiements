@@ -20,7 +20,7 @@ var numBalls = 10;
 function setup() {
     var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
 
-    gfx = createImage(width / scaleSz, height / scaleSz);
+    gfx = createImage(windowWidth / scaleSz, windowHeight / scaleSz);
     gfx.loadPixels();
   
   	scaledGfx = createImage(windowWidth, windowHeight);
