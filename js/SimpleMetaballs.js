@@ -4,8 +4,8 @@
  Updated: July 22 2017
 */
 
-let numBands = 2,
-    scaleSz = 4,
+let numBands = 1,
+    scaleSz = 8,
     gfx,
     scaledGfx;
 let m;
@@ -18,7 +18,8 @@ let Band = 255; // numBands;
 var numBalls = 10;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
+
     gfx = createImage(width / scaleSz, height / scaleSz);
     gfx.loadPixels();
   
@@ -28,6 +29,8 @@ function setup() {
   	for(let i = 0; i < numBalls; ++i){
         balls.push(new Metaball());
     }
+
+    multiCanvas.parent("multiCanvas");
 }
 
 function draw() {
@@ -57,19 +60,27 @@ function draw() {
 
         let intensity = colorLookup(255 * col);
 
-        //gfx.pixels[i * 4 + 0] = intensity;
-        //gfx.pixels[i * 4 + 1] = intensity;
+        /*
+        gfx.pixels[i * 4 + 0] = intensity;
+        gfx.pixels[i * 4 + 1] = intensity;
         gfx.pixels[i * 4 + 2] = intensity;
-        gfx.pixels[i * 4 + 3] = 255; //was 255
+        gfx.pixels[i * 4 + 3] = 255;
+        */
+        gfx.pixels[i * 4 + 0] = 0;
+        gfx.pixels[i * 4 + 1] = intensity;
+        gfx.pixels[i * 4 + 2] = 0;
+        gfx.pixels[i * 4 + 3] = 255; 
+
 
     }
   
     gfx.updatePixels();
     scaleImage(gfx, scaledGfx);
     scaledGfx.updatePixels();
-  
     image(scaledGfx, 0, 0);
-    //filter(GRAY);
+    //filter(INVERT);
+    //filter(ERODE);
+    //filter(THRESHOLD);
 
 }
 
@@ -79,6 +90,14 @@ function colorLookup(i) {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  //gfx.remove();
-  //gfx = createGraphics(width / scaleSz, height / scaleSz);
+
+  multiCanvas.remove();
+  multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
+
+  gfx.resize(width / scaleSz, height / scaleSz);
+  gfx.updatePixels();
+
+  scaledGfx.resize(windowWidth, windowHeight);
+  scaledGfx.updatePixels();
+
 }
