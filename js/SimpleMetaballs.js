@@ -60,7 +60,7 @@ function draw() {
         gfx.pixels[i * 4 + 0] = intensity;
         gfx.pixels[i * 4 + 1] = intensity;
         gfx.pixels[i * 4 + 2] = intensity;
-        gfx.pixels[i * 4 + 3] = 255; //was 255
+        gfx.pixels[i * 4 + 3] = 128; //was 255
     }
   
     gfx.updatePixels();
