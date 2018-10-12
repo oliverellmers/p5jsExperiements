@@ -4,9 +4,21 @@ var rows;
 var board;
 var next;
 
+var font;
+var fontsize = 32;
+
+function preload() {
+  font = loadFont('assets/Agenda-Super210.otf');
+  
+}
+
 function setup() {
   frameRate(25);
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
+
+  textFont(font);
+  textSize(fontsize);
+  
 
   setupGrid();
 
@@ -38,10 +50,18 @@ function draw() {
     for ( var j = 0; j < rows;j++) {
       if ((board[i][j] == 1)) fill(0,0,255);
       else fill(0); 
-      stroke(0);
+      //stroke(0);
+      stroke(0,0,255);
       rect(i*w, j*w, w-1, w-1);
     }
   }
+
+  textAlign(CENTER, CENTER);
+  fill(0,0,255);
+  stroke(0,0,255);
+  text('LIFE\'S A GAME', windowWidth/2, windowHeight/2);
+
+
 
 }
 
