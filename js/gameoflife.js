@@ -44,14 +44,14 @@ function setupGrid(){
 }
 
 function draw() {
-  background(0);
+  background(255);
   generate();
   for ( var i = 0; i < columns;i++) {
     for ( var j = 0; j < rows;j++) {
       if ((board[i][j] == 1)) fill(0,0,255);
-      else fill(0); 
-      //stroke(0);
-      stroke(0,0,255, 180);
+      else fill(255,255,255); 
+      stroke(255, 0, 0);
+      stroke(0,0,255);
       rect(i*w, j*w, w-1, w-1);
     }
   }
