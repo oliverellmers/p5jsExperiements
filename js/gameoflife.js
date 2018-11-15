@@ -50,8 +50,8 @@ function draw() {
     for ( var j = 0; j < rows;j++) {
       if ((board[i][j] == 1)) fill(0,0,255);
       else fill(255,255,255); 
-      stroke(255, 0, 0);
-      stroke(0,0,255);
+      stroke(0, 0, 0);
+      stroke(0,0,0);
       rect(i*w, j*w, w-1, w-1);
     }
   }
