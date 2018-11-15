@@ -15,7 +15,7 @@ function preload() {
 function setup() {
   frameRate(25);
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
-
+  multiCanvas.style('display', 'block');
   textFont(font);
   textSize(fontsize);
   
