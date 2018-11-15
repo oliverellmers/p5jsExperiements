@@ -22,7 +22,7 @@ function setup() {
 
   setupGrid();
 
-  multiCanvas.parent("multiCanvas");
+  //multiCanvas.parent("multiCanvas");
 }
 
 function setupGrid(){
