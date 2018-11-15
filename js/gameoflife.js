@@ -26,7 +26,7 @@ function setup() {
 }
 
 function setupGrid(){
-  w = 20;
+  w = 50;
   // Calculate columns and rows
   columns = floor(width/w);
   rows = floor(height/w);
