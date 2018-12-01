@@ -13,6 +13,7 @@ function preload() {
 }
 
 function setup() {
+  noCursor();
   frameRate(25);
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
   //multiCanvas.style('display', 'block');
@@ -55,6 +56,10 @@ function draw() {
       rect(i*w, j*w, w-1, w-1);
     }
   }
+
+  blendMode(DIFFERENCE);
+  fill(0,0,0);
+  ellipse(mouseX, mouseY, 24, 24);
 
   /*
   textAlign(CENTER, CENTER);
