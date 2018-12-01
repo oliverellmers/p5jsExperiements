@@ -14,7 +14,6 @@ function preload() {
 
 function setup() {
   noCursor();
-  frameRate(25);
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
   //multiCanvas.style('display', 'block');
   textFont(font);
@@ -69,17 +68,26 @@ function draw() {
   text('LIFE\'S A GAME', windowWidth/2, windowHeight/2);
   */
 
+  if(mouseIsPressed){
+
+    filter(INVERT);
+  }
+}
 
 
+function mouseReleased() {
+  loop();
 }
 
 // reset board when mouse is pressed
 function mousePressed() {
   init();
+  noLoop();
 }
 
 // Fill board randomly
 function init() {
+
   for (var i = 0; i < columns; i++) {
     for (var j = 0; j < rows; j++) {
       // Lining the edges with 0s
