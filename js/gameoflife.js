@@ -25,6 +25,7 @@ function setup() {
   setupGrid();
 
   multiCanvas.parent("multiCanvas");
+  multiCanvas.mousePressed(mousePressedBehaviour);
 }
 
 function setupGrid(){
@@ -59,12 +60,12 @@ function draw() {
     }
   }
 
-/*
+
   blendMode(DIFFERENCE);
   fill(255,255,255);
   ellipse(mouseX, mouseY, 24, 24);
   blendMode(NORMAL)
-  */
+  
 
   /*
   textAlign(CENTER, CENTER);
@@ -86,6 +87,11 @@ function mouseReleased() {
 
 // reset board when mouse is pressed
 function mousePressed() {
+  //init();
+  //noLoop();
+}
+
+function mousePressedBehaviour(){
   init();
   noLoop();
 }
