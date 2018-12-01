@@ -58,8 +58,9 @@ function draw() {
   }
 
   blendMode(DIFFERENCE);
-  fill(0,0,0);
+  fill(255,255,255);
   ellipse(mouseX, mouseY, 24, 24);
+  blendMode(NORMAL)
 
   /*
   textAlign(CENTER, CENTER);
