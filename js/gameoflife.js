@@ -44,7 +44,6 @@ function setupGrid(){
 }
 
 function draw() {
-  cursor("http://www.rw-designer.com/cursor-view/27301.png",16, 16 )
   background(255);
   generate();
   for ( var i = 0; i < columns;i++) {
