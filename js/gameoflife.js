@@ -7,6 +7,8 @@ var next;
 var font;
 var fontsize = 32;
 
+var isOverSketch = false;
+
 function preload() {
   font = loadFont('assets/Agenda-Super210.otf');
   
@@ -25,6 +27,8 @@ function setup() {
   setupGrid();
 
   multiCanvas.parent("multiCanvas");
+  multiCanvas.mouseOver(overSketch);
+  multiCanvas.mouseOut(outSketch);
   //multiCanvas.mousePressed(mousePressedBehaviour);
 }
 
@@ -60,12 +64,18 @@ function draw() {
     }
   }
 
-/*
+
   blendMode(DIFFERENCE);
-  fill(255,255,255);
+  if(isOverSketch ){
+    fill(255,255,255, 255);
+  }else{
+    fill(255,255,255, 0);
+  }
+  
   ellipse(mouseX, mouseY, 24, 24);
+  
   blendMode(NORMAL)
-  */
+  
   
 
   /*
@@ -79,6 +89,14 @@ function draw() {
 
     filter(INVERT);
   }
+}
+
+function overSketch() {
+  isOverSketch = true;
+}
+
+function outSketch() {
+  isOverSketch = false;
 }
 
 
