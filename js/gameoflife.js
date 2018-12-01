@@ -13,7 +13,7 @@ function preload() {
 }
 
 function setup() {
-  //noCursor();
+  noCursor();
   w = windowWidth/20;
 
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
@@ -60,11 +60,12 @@ function draw() {
     }
   }
 
-
+/*
   blendMode(DIFFERENCE);
   fill(255,255,255);
   ellipse(mouseX, mouseY, 24, 24);
   blendMode(NORMAL)
+  */
   
 
   /*
