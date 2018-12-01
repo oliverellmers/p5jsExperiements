@@ -14,6 +14,8 @@ function preload() {
 
 function setup() {
   noCursor();
+  w = windowWidth/20;
+
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
   //multiCanvas.style('display', 'block');
   textFont(font);
@@ -26,7 +28,8 @@ function setup() {
 }
 
 function setupGrid(){
-  w = 50;
+  //w = 50;
+  
   // Calculate columns and rows
   columns = floor(width/w);
   rows = floor(height/w);
@@ -138,6 +141,6 @@ function windowResized() {
   multiCanvas.remove();
   multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
   setupGrid();
-  init();
+  //init();
 
 }
