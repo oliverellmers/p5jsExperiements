@@ -25,7 +25,7 @@ function setup() {
   setupGrid();
 
   multiCanvas.parent("multiCanvas");
-  multiCanvas.mousePressed(mousePressedBehaviour);
+  //multiCanvas.mousePressed(mousePressedBehaviour);
 }
 
 function setupGrid(){
@@ -88,8 +88,8 @@ function mouseReleased() {
 
 // reset board when mouse is pressed
 function mousePressed() {
-  //init();
-  //noLoop();
+  init();
+  noLoop();
 }
 
 function mousePressedBehaviour(){
