@@ -9,14 +9,28 @@ var fontsize = 32;
 
 var isOverSketch = false;
 
+var isMobileBrowser = false;
+
 function preload() {
   font = loadFont('assets/Agenda-Super210.otf');
   
 }
 
+function checkIfMobile(){
+  if(/Mobi/i.test(navigator.userAgent) || /Android/i.test(navigator.userAgent)){
+    console.log("I am on a  mobile site");
+    isMobileBrowser = true;
+  }else{
+    console.log("I am on a desktop site");
+    isMobileBrowser = false;
+  }
+}
+
 function setup() {
   noCursor();
   w = windowWidth/20;
+
+  //console.log("w: " + w);
 
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
   //multiCanvas.style('display', 'block');
@@ -30,6 +44,7 @@ function setup() {
   multiCanvas.mouseOver(overSketch);
   multiCanvas.mouseOut(outSketch);
   //multiCanvas.mousePressed(mousePressedBehaviour);
+  checkIfMobile();
 }
 
 function setupGrid(){
@@ -66,13 +81,17 @@ function draw() {
 
 
   blendMode(DIFFERENCE);
-  if(isOverSketch ){
+  if(isOverSketch && !isMobileBrowser){
+    console.log("");
     fill(255,255,255, 255);
   }else{
     fill(255,255,255, 0);
   }
   
+  
+
   ellipse(mouseX, mouseY, 24, 24);
+  
   
   blendMode(NORMAL)
   
@@ -169,5 +188,6 @@ function windowResized() {
   multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
   setupGrid();
   //init();
+  checkIfMobile();
 
 }
