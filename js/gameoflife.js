@@ -49,10 +49,11 @@ function setup() {
 
 function setupGrid(){
   //w = 50;
+  var h = height - 96;
   
   // Calculate columns and rows
   columns = floor(width/w);
-  rows = floor(height/w);
+  rows = floor(h/w);
   // Wacky way to make a 2D array is JS
   board = new Array(columns);
   for (var i = 0; i < columns; i++) {
