@@ -49,7 +49,7 @@ function setup() {
 
 function setupGrid(){
   //w = 50;
-  var h = height - 96;
+  var h = height - 72;
   
   // Calculate columns and rows
   columns = floor(width/w);
