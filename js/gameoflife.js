@@ -85,7 +85,7 @@ function draw() {
 
   blendMode(DIFFERENCE);
   if(isOverSketch /*&& !isMobileBrowser*/){
-    console.log("");
+    //console.log("");
     fill(255,255,255, 255);
   }else{
     fill(255,255,255, 0);
