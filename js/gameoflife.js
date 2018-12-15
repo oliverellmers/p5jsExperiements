@@ -9,13 +9,14 @@ var fontsize = 32;
 
 var isOverSketch = false;
 
-var isMobileBrowser = false;
+//var isMobileBrowser = false;
 
 function preload() {
   font = loadFont('assets/Agenda-Super210.otf');
   
 }
 
+/*
 function checkIfMobile(){
   if(/Mobi/i.test(navigator.userAgent) || /Android/i.test(navigator.userAgent)){
     console.log("I am on a  mobile site");
@@ -25,6 +26,7 @@ function checkIfMobile(){
     isMobileBrowser = false;
   }
 }
+*/
 
 function setup() {
   noCursor();
@@ -44,7 +46,7 @@ function setup() {
   multiCanvas.mouseOver(overSketch);
   multiCanvas.mouseOut(outSketch);
   //multiCanvas.mousePressed(mousePressedBehaviour);
-  checkIfMobile();
+  //checkIfMobile();
 }
 
 function setupGrid(){
@@ -82,7 +84,7 @@ function draw() {
 
 
   blendMode(DIFFERENCE);
-  if(isOverSketch && !isMobileBrowser){
+  if(isOverSketch /*&& !isMobileBrowser*/){
     console.log("");
     fill(255,255,255, 255);
   }else{
