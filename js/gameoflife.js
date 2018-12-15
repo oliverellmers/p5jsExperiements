@@ -191,6 +191,6 @@ function windowResized() {
   multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
   setupGrid();
   //init();
-  checkIfMobile();
+  //checkIfMobile();
 
 }
