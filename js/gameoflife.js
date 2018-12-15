@@ -33,7 +33,7 @@ function setup() {
   //console.log("w: " + w);
 
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
-  //multiCanvas.style('display', 'block');
+  multiCanvas.style('display', 'block');
   textFont(font);
   textSize(fontsize);
   
