@@ -42,6 +42,7 @@ var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
 function setup() {
   noCursor();
+  getMobileOperatingSystem();
   w = windowWidth/20;
 
   //console.log("w: " + w);
@@ -204,5 +205,6 @@ function windowResized() {
   setupGrid();
   //init();
   //checkIfMobile();
+  getMobileOperatingSystem();
 
 }
