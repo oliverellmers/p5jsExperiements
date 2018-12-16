@@ -9,24 +9,36 @@ var fontsize = 32;
 
 var isOverSketch = false;
 
-//var isMobileBrowser = false;
+var isMobile = false;
 
 function preload() {
   font = loadFont('assets/Agenda-Super210.otf');
   
 }
 
-/*
-function checkIfMobile(){
-  if(/Mobi/i.test(navigator.userAgent) || /Android/i.test(navigator.userAgent)){
-    console.log("I am on a  mobile site");
-    isMobileBrowser = true;
-  }else{
-    console.log("I am on a desktop site");
-    isMobileBrowser = false;
+function getMobileOperatingSystem() {
+var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Windows Phone must come first because its UA also contains "Android"
+  if (/windows phone/i.test(userAgent)) {
+      isMobile = true;
+      return "Windows Phone";
   }
+
+  if (/android/i.test(userAgent)) {
+      isMobile = true;
+      return "Android";
+  }
+
+  // iOS detection from: http://stackoverflow.com/a/9039885/177710
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      isMobile = true;
+      return "iOS";
+  }
+
+  isMobile = false;
+  return "unknown";
 }
-*/
 
 function setup() {
   noCursor();
@@ -84,7 +96,7 @@ function draw() {
 
 
   blendMode(DIFFERENCE);
-  if(isOverSketch /*&& !isMobileBrowser*/){
+  if(isOverSketch && !isMobile){
     //console.log("");
     fill(255,255,255, 255);
   }else{
