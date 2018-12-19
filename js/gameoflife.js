@@ -4,82 +4,46 @@ var rows;
 var board;
 var next;
 
-var font;
-var fontsize = 32;
-
 var isOverSketch = false;
-
 var isMobile = false;
 
-function preload() {
-  font = loadFont('assets/Agenda-Super210.otf');
-  
-}
+var isOverParagraph = false;
+var paragraph;
+var pWeight = 10;
 
-function getMobileOperatingSystem() {
-var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+var currentVal = 0;
+var targetVal = 0;
 
-    // Windows Phone must come first because its UA also contains "Android"
-  if (/windows phone/i.test(userAgent)) {
-      isMobile = true;
-      return "Windows Phone";
-  }
+var zoom = 1.00;
+var zoomStr = "vw";
 
-  if (/android/i.test(userAgent)) {
-      isMobile = true;
-      return "Android";
-  }
+var zoomCurrent = 0;
+var zoomTarget = 0;
 
-  // iOS detection from: http://stackoverflow.com/a/9039885/177710
-  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-      isMobile = true;
-      return "iOS";
-  }
+var easing = 0.25;
 
-  isMobile = false;
-  return "unknown";
-}
+
 
 function setup() {
   noCursor();
   getMobileOperatingSystem();
-  w = windowWidth/20;
-
-  //console.log("w: " + w);
-
+  
   var multiCanvas = createCanvas(windowWidth, windowHeight, P2D);
   multiCanvas.style('display', 'block');
-  textFont(font);
-  textSize(fontsize);
   
-
+  w = windowWidth/20;
   setupGrid();
+
+  paragraph = createP("Oliver Ellmers");
+  paragraph.class("pClass");
+  paragraph.position(0,0);
+  paragraph.mouseOver(overParagraph);
+  paragraph.mouseOut(outParagraph);
+
 
   multiCanvas.parent("multiCanvas");
   multiCanvas.mouseOver(overSketch);
   multiCanvas.mouseOut(outSketch);
-  //multiCanvas.mousePressed(mousePressedBehaviour);
-  //checkIfMobile();
-}
-
-function setupGrid(){
-  //w = 50;
-  var h = height;// - 72;
-  
-  // Calculate columns and rows
-  columns = floor(width/w);
-  rows = floor(h/w);
-  // Wacky way to make a 2D array is JS
-  board = new Array(columns);
-  for (var i = 0; i < columns; i++) {
-    board[i] = new Array(rows);
-  } 
-  // Going to use multiple 2D arrays and swap them
-  next = new Array(columns);
-  for (i = 0; i < columns; i++) {
-    next[i] = new Array(rows);
-  }
-  init();
 }
 
 function draw() {
@@ -95,33 +59,48 @@ function draw() {
     }
   }
 
+  
+  paragraph.elt.style['font-variation-settings'] = `"wght" ${currentVal}, "wdth" ${125}`;
+  //paragraph.position(0, windowHeight/2);
+  paragraph.center();
+
+  
+  if(isOverParagraph){
+    //background(255);
+    zoomTarget = 100;
+    zoomStr = zoomCurrent + "vw";
+
+    //paragraph.style("font-size", zoomStr);
+    paragraph.style("color:rgba(255,255,255,255);");
+  }else{
+    zoomTarget = 13.5;
+    zoomStr = zoomCurrent + "vw";
+
+    //paragraph.style("font-size", zoomStr);
+    paragraph.style("color:rgba(255,255,255,0);");
+  }
+  
+  var zoomDiff = zoomTarget - zoomCurrent;
+  zoomCurrent += zoomDiff * easing;
+
+  //console.log("zoomStr: " + zoomStr);
+  
+  var diff = targetVal - currentVal;
+  currentVal += diff * easing;
+
+
 
   blendMode(DIFFERENCE);
   if(isOverSketch && !isMobile){
-    //console.log("");
     fill(255,255,255, 255);
   }else{
     fill(255,255,255, 0);
   }
-  
-  
-
   ellipse(mouseX, mouseY, 24, 24);
-  
-  
-  blendMode(NORMAL)
-  
-  
+  blendMode(NORMAL);
 
-  /*
-  textAlign(CENTER, CENTER);
-  fill(0,0,255);
-  stroke(0,0,255);
-  text('LIFE\'S A GAME', windowWidth/2, windowHeight/2);
-  */
 
   if(mouseIsPressed){
-
     filter(INVERT);
   }
 }
@@ -148,6 +127,39 @@ function mousePressed() {
 function mousePressedBehaviour(){
   init();
   noLoop();
+}
+
+function overParagraph(){
+ // console.log("mouse is over the paragraph");
+  isOverParagraph = true;
+  targetVal = 100;
+}
+
+function outParagraph(){
+  //console.log("mouse is over the paragraph");
+  isOverParagraph = false;
+  targetVal = 10;
+}
+
+function setupGrid(){
+  var h = height;
+  
+  // Calculate columns and rows
+  columns = floor(width/w);
+  rows = floor(h/w);
+
+  // Wacky way to make a 2D array is JS
+  board = new Array(columns);
+  for (var i = 0; i < columns; i++) {
+    board[i] = new Array(rows);
+  } 
+  
+  // Going to use multiple 2D arrays and swap them
+  next = new Array(columns);
+  for (i = 0; i < columns; i++) {
+    next[i] = new Array(rows);
+  }
+  init();
 }
 
 // Fill board randomly
@@ -207,4 +219,28 @@ function windowResized() {
   //checkIfMobile();
   getMobileOperatingSystem();
 
+}
+
+function getMobileOperatingSystem() {
+var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Windows Phone must come first because its UA also contains "Android"
+  if (/windows phone/i.test(userAgent)) {
+      isMobile = true;
+      return "Windows Phone";
+  }
+
+  if (/android/i.test(userAgent)) {
+      isMobile = true;
+      return "Android";
+  }
+
+  // iOS detection from: http://stackoverflow.com/a/9039885/177710
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      isMobile = true;
+      return "iOS";
+  }
+
+  isMobile = false;
+  return "unknown";
 }

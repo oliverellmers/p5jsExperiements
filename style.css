@@ -13,7 +13,6 @@ body{
 	display: flex;
 	justify-content: left;
 	overflow: hidden;
-	
 }
 
 
@@ -24,5 +23,21 @@ body{
 	position:absolute;
 }
 
+@font-face{
+	src:url("assets/AgendaGX.ttf")
+		format("truetype");
+		font-family:Agenda;
+}
+
+.pClass{
+	width:100%;
+	margin:0;
+  	overflow: hidden;
+	font-family: Agenda;
+	font-size: 13.5vw;
+  	font-variation-settings: "Weight" 10, "Width" 10;
+  	text-align: center;
+  	mix-blend-mode: difference;
+}
 
 
