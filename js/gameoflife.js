@@ -71,7 +71,7 @@ function draw() {
     zoomStr = zoomCurrent + "vw";
 
     //paragraph.style("font-size", zoomStr);
-    paragraph.style("color:rgba(255,255,255,255);");
+    paragraph.style("color:rgba(255,255,255,0);");
   }else{
     zoomTarget = 13.5;
     zoomStr = zoomCurrent + "vw";
