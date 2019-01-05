@@ -97,7 +97,7 @@ function draw() {
     fill(255,255,255, 0);
   }
   ellipse(mouseX, mouseY, 24, 24);
-  blendMode(NORMAL);
+  blendMode(BLEND);
 
 
   if(mouseIsPressed){
