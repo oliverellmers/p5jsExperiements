@@ -8,13 +8,20 @@ https://github.com/ml5js/ml5-examples/tree/master/p5js/PoseNet
 let w = 640;
 let h = 480;
 let video;
+let videoCopy;
 let poseNet;
 let poses = [];
 let skeletons = [];
 
+var imageRatio = 1;
+
 function setup() {
-  createCanvas(w, h);
-  video = createCapture(VIDEO);
+  createCanvas(windowWidth, windowHeight);
+  imageRatio = windowHeight/windowWidth;
+
+
+  //video = createCapture(VIDEO);
+  //video.size(windowWidth, windowHeight);
   
   poseNet = ml5.poseNet(video, 'multiple', gotPoses);
   
@@ -24,9 +31,14 @@ function setup() {
 }
 
 function draw() {
-  image(video, 0, 0, w, h);
+  background(0);
+  translate(0, (windowHeight - (windowHeight * imageRatio))/2);
+
+  image(video, 0, 0, windowWidth, windowHeight * imageRatio);
+  filter('INVERT');
+  filter('GRAY');
   drawKeypoints();
-  drawSkeleton();
+  //drawSkeleton();
 }
 
 
@@ -46,6 +58,8 @@ function drawKeypoints() {
     for(let j = 0; j < poses[i].pose.keypoints.length; j++) {
       let keypoint = poses[i].pose.keypoints[j];
       if (keypoint.score > 0.2) {
+        noStroke();
+        fill(255, 0, 0);
         ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
       }
     }

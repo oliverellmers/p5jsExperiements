@@ -9,9 +9,9 @@ var count;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   //u = int(width/15);
-  u = 100;
+  u = 106;
   l = 20;
-  var highCount = height/80;
+  var highCount = height/110;
   var wideCount = width/80;
   count = int(highCount * wideCount);
   
@@ -26,18 +26,20 @@ function setup() {
 function draw() {
   
   
-  
+  strokeCap(SQUARE);
+
   if (mouseIsPressed) {
     background(0);
-    stroke(255,163,163);
+    stroke(255,0,0);
   } else {
-    background(255,163,163);
-    stroke(255);
+    background(0);
+    stroke(255,0,0);
   }
   
-  strokeWeight(15);
-  
-  translate(20, 20);
+  //noFill();
+  strokeWeight(1);
+  translate(20, 40);
+  fill(255,0,0);
   
   for (var i = 0; i <= count; i++) {
     mods[i].update();
@@ -66,7 +68,8 @@ Module.prototype.draw2 = function() {
   push();
   translate(this.x, this.y);
   rotate(this.a);
-  line(-l,0,l,0);
+  //line(-l,0,l,0);
+  rect(-10,0,30,30);
   pop();
 }
 

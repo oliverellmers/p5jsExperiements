@@ -40,7 +40,7 @@ function setup() {
     pastFrames.push(p);
   }
 
-  video.parent("video");
+  //video.parent("video");
 }
 
 function draw() {  

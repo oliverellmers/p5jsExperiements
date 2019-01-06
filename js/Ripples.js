@@ -1,9 +1,9 @@
-const block_size = 20;
-const block_core = 1;
-const block_move_distance = 10;
-const block_move_range = 70;
-const block_scale = 0.02;
-const ripple_speed = 0.24;
+const block_size = 50;
+const block_core = 10;
+const block_move_distance = -10;
+const block_move_range = 100;
+const block_scale = 0.125;
+const ripple_speed = 1;
 
 let show_ripples = false;
 let show_info = false;
@@ -63,7 +63,7 @@ function draw() {
 
     mouse_speed = dist(mouseX, mouseY, pmouseX, pmouseY);
 
-    background(0, 140);
+    background(0, 255);
 
     rectMode(CENTER);
 
@@ -129,9 +129,11 @@ class Block {
     }
 
     render() {
-        fill(255, cubicInOut(this.amp, 60, 240, 15));
-        rect(this.pos.x + this.diff.x, this.pos.y + this.diff.y, (block_core + this.amp * block_scale) * 5, block_core + this.amp * block_scale * 0.5);
-        rect(this.pos.x + this.diff.x, this.pos.y + this.diff.y, block_core + this.amp * block_scale * 0.5, (block_core + this.amp * block_scale) * 5);
+        //fill(255, cubicInOut(this.amp, 60, 240, 15));
+        fill(255, 0, 0);
+        ellipse(this.pos.x + this.diff.x, this.pos.y + this.diff.y, (block_core + this.amp * block_scale) * 5, (block_core + this.amp * block_scale) * 5 );
+        //rect(this.pos.x + this.diff.x, this.pos.y + this.diff.y, (block_core + this.amp * block_scale) * 5, block_core + this.amp * block_scale * 0.5);
+        //rect(this.pos.x + this.diff.x, this.pos.y + this.diff.y, block_core + this.amp * block_scale * 0.5, (block_core + this.amp * block_scale) * 5);
     }
 
     /**
